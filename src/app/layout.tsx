@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Provider } from "../components/ui/provider";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Box, Flex } from "@chakra-ui/react";
+import { Provider } from "@/components/chakra-ui/provider";
+import QueryProviders from "@/components/tanstack-query/provider";
+import { Nav } from "@/app/_shared/nav";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,14 +15,27 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const queryClient = new QueryClient();
-
   return (
-    <html suppressHydrationWarning>
+    <html suppressHydrationWarning lang="en">
       <body>
-        <QueryClientProvider client={queryClient}>
-          <Provider>{children}</Provider>
-        </QueryClientProvider>
+        <QueryProviders>
+          <Provider>
+            <Flex justifyContent="center" alignItems="start" h="100vh">
+              <Box
+                bg="white"
+                borderRadius="md"
+                boxShadow="sm"
+                width={600}
+                p={4}
+                m={4}
+              >
+                <Nav />
+                <br />
+                {children}
+              </Box>
+            </Flex>
+          </Provider>
+        </QueryProviders>
       </body>
     </html>
   );
