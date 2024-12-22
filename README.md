@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 구동 방법
 
-## Getting Started
-
-First, run the development server:
+### 1. 의존성 설치 및 개발 환경 실행
 
 ```bash
-npm run dev
-# or
+yarn #
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- api 서버는 SSG 측에서 제공한 별도의 mock_api로 동작하며 localhost:3000으로 실행합니다. (본 프로젝트에 포함되어 있지 않음)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 2. 브라우저로 접속
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- 접속 시 자동으로 /allBest로 redirect됩니다.
+- 서버가 미구동 상태인 경우 에러 화면이 출력됩니다.
 
-## Learn More
+## 주요 기능
 
-To learn more about Next.js, take a look at the following resources:
+<img src="./public/ssg_final.png" alt="최종 결과물" width="500" />
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 1. 탭 선택
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- 전체 베스트 / 실시간 베스트 / 장보기 상품 / 백화점 상품 4개의 탭을 각각 클릭하여 이동합니다.
+- 각각의 페이지가 route됩니다.
+- allBest / realTime / grocery / department
 
-## Deploy on Vercel
+### 2. 카테고리 선택
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- 탭 아래에 상품 카테고리가 출력됩니다.
+- 본 과제에서 카테고리별 상품은 출력되지 않으며 전체 카테고리만 출력됩니다.
+- 실시간 베스트 페이지에서는 카테고리가 출력되지 않습니다.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 3. 상품 조회
+
+- 각 탭에 해당하는 api로 조회한 데이터가 화면에 출력됩니다.
+- 상품의 이미지 또는 상품명을 클릭 시 상세 페이지로 이동니다. (다른 탭으로 열기)
+- 이미지 하단에 상품 benefit 정보, 좋아요, 장바구니 UI를 출력합니다. (기능 구현 x)
+- 상품명 하단에 가격이 출력됩니다.
+- 가격 하단에 단위 가격이 출력됩니다.
+- 단위 가격 하단에 평점과 리뷰 개수가 출력됩니다.
+
+### 4. 전체 베스트 무한 스크롤
+
+- 전체 베스트 상품은 무한 스크롤이 적용되어 있으며 화면 최하단 20%에 도달 시 새 상품이 추가됩니다.
+- 무한 스크롤은 성능을 고려하여 scroll event를 사용하지 않고 IntersectionObserver를 사용하여 구현하였습니다.
